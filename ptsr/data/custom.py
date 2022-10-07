@@ -1,5 +1,6 @@
 import os
 from ptsr.data import srdata
+from glob import glob
 
 class CustomData(srdata.SRData):
     def __init__(self, cfg, name='MyData', train=True, benchmark=False):
