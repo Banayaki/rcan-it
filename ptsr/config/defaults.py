@@ -65,7 +65,7 @@ _C.DATASET.DATA_TRAIN = ['DF2K']
 _C.DATASET.DATA_VAL = ['DF2K']
 _C.DATASET.DATA_TEST = ['DF2K', 'Set5',
                         'Set14C', 'B100', 'Urban100', 'Manga109']
-_C.DATASET.DATA_RANGE = [[1, 3550], [3551, 3555]]
+_C.DATASET.DATA_RANGE = [[0, 1000], [0, 1000]]
 _C.DATASET.DATA_EXT = 'bin'  # 'bin', 'sep' or 'img'
 _C.DATASET.DATA_SCALE = [4]
 _C.DATASET.OUT_PATCH_SIZE = 192  # square patch size of model output
