@@ -1,11 +1,13 @@
 import os
 import math
+
 import GPUtil
 from decimal import Decimal
 
 import torch
 import torch.nn.utils as utils
 from . import utility
+from .tensorboard_logger import TensorboardLogger
 from .solver import *
 from tqdm import tqdm
 from torch.cuda.amp import autocast, GradScaler
@@ -24,6 +26,7 @@ class Trainer():
         self.model = model
         self.loss = loss
         self.device = device
+        self.logger = TensorboardLogger(device)
         self.iter_start = 0
 
         if not cfg.SOLVER.TEST_ONLY:
@@ -72,6 +75,9 @@ class Trainer():
             with autocast(enabled=autocast_enabled):
                 sr = self.model(lr)
                 loss = self.loss(sr, hr)
+            
+            self.logger.log_value('Loss', loss, i)
+            self.logger.calc_and_log_metrics(sr, hr, i)
 
             self.optimizer.zero_grad(set_to_none = not self.mixed_fp)
             if autocast_enabled:

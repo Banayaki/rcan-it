@@ -34,7 +34,6 @@ class SRData(data.Dataset):
         if cfg.DATASET.DATA_EXT.find('bin') >= 0:
             # Binary files are stored in 'bin' folder
             # If the binary file exists, load it. If not, make it.
-            list_hr, list_lr = self._scan()
             self.images_hr = self._check_and_load(
                 cfg.DATASET.DATA_EXT, list_hr, self._name_hrbin()
             )
@@ -103,7 +102,7 @@ class SRData(data.Dataset):
         return list_hr, list_lr
 
     def _set_filesystem(self, dir_data):
-        self.apath = os.path.join(dir_data, self.name)
+        self.apath = os.path.join(dir_data, self.name, self.split)
         self.dir_hr = os.path.join(self.apath, 'HR')
         self.dir_lr = os.path.join(self.apath, 'LR_bicubic')
         if self.input_large:

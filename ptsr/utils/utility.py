@@ -251,3 +251,10 @@ def calc_psnr_numpy(sr, hr, scale, rgb_range: float = 255.0):
 
     psnr = 20 * log10(rgb_range / sqrt(mse))
     return psnr
+
+class Singleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]

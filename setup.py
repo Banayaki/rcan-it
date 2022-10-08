@@ -13,7 +13,8 @@ requirements = [
     'yacs>=0.1.8',
     'imageio>=2.9.0',
     'GPUtil>=1.4.0',
-    'tqdm>=4.62.0'
+    'tqdm>=4.62.0',
+    'torchmetrics>=0.8.2'
 ]
 
 
@@ -23,15 +24,15 @@ def getInclude():
 
 
 def setup_package():
-    __version__ = '0.1'
-    url = 'https://github.com/zudi-lin/rcan-it'
+    __version__ = '0.2'
+    url = 'https://github.com/Banayaki/rcan-it'
 
     setup(name='ptsr',
-          description='A PyTorch framework for image super-resolution',
+          description='Wrapper for RCAN-IT',
           version=__version__,
           url=url,
           license='MIT',
-          author='Zudi Lin',
+          author='Artem Mukhin',
           install_requires=requirements,
           include_dirs=getInclude(),
           packages=find_packages(),

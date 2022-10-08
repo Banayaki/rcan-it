@@ -4,6 +4,7 @@ from glob import glob
 
 class CustomData(srdata.SRData):
     def __init__(self, cfg, name='MyData', train=True, benchmark=False):
+        self.split = 'train' if train else 'test'
         data_range = cfg.DATASET.DATA_RANGE
         if train:
             data_range = data_range[0]
@@ -36,8 +37,8 @@ class CustomData(srdata.SRData):
 
     def _set_filesystem(self, dir_data):
         self.apath = dir_data
-        self.dir_hr = os.path.join(self.apath, 'train', 'gt')
-        self.dir_lr = os.path.join(self.apath, 'train', 'doe')
+        self.dir_hr = os.path.join(self.apath, self.split, 'gt')
+        self.dir_lr = os.path.join(self.apath, self.split, 'doe')
         self.ext = '.png'
 
     def _name_hrbin(self):
@@ -53,15 +54,3 @@ class CustomData(srdata.SRData):
             'bin',
             '{}_bin_LR_X{}.npy'.format(self.split, scale)
         )
-
-    def __len__(self):
-        if self.train:
-            return len(self.images_hr) * self.repeat
-        else:
-            return len(self.images_hr)
-
-    def _get_index(self, idx):
-        if self.train:
-            return idx % len(self.images_hr)
-        else:
-            return idx
