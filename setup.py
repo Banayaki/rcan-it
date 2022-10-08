@@ -14,7 +14,8 @@ requirements = [
     'imageio>=2.9.0',
     'GPUtil>=1.4.0',
     'tqdm>=4.62.0',
-    'torchmetrics>=0.8.2'
+    'torchmetrics>=0.8.2',
+    'tensorboard>=1.15.5'
 ]
 
 
